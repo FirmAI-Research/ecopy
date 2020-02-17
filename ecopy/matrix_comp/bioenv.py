@@ -4,27 +4,28 @@ from scipy.spatial.distance import pdist, squareform
 from scipy.stats import spearmanr
 from itertools import combinations
 
+
 def bioenv(dist, vars_df, columns=None):
     '''
     Docstring for function ecopy.simper
     ====================
-    Find best subset of environmental variables maximally correlated with 
+    Find best subset of environmental variables maximally correlated with
         community distances
-    
+
     Use
     ----
     biodiv(dist, vars_df, columns=False)
-    
+
     Returns a pandas.DataFrame containing the "best" subset of variables
     at each subset size, as well as the correlation coefficient of each
 
     Parameters
     ----------
     dist: A numpy.ndarray containing distances between objects
-    vars_df: A pandas.DataFrame containing columns of variables 
+    vars_df: A pandas.DataFrame containing columns of variables
         associated with the objects in `distance_matrix`
-    columns: An iterable of strs, optional column names in `vars_df` to include 
-        as variables in the calculations. If not provided, defaults to all 
+    columns: An iterable of strs, optional column names in `vars_df` to include
+        as variables in the calculations. If not provided, defaults to all
         columns in `vars_df`
 
     Examples
@@ -85,7 +86,7 @@ def bioenv(dist, vars_df, columns=None):
     except ValueError:
         raise TypeError("All specified columns in the data frame must be "
                         "numeric.")
-    
+
     n = len(columns)
     ntake = 2**n - 1
     if n > 8:
@@ -124,6 +125,7 @@ def bioenv(dist, vars_df, columns=None):
         max_rhos[subset_size - 1] = (vars_label, subset_size, max_rho[0])
 
     return DataFrame.from_records(max_rhos, index='vars')
+
 
 def _scale(df):
     df = df.copy()

@@ -29,7 +29,7 @@ with open('VERSION.txt', 'w') as f:
 # Use Cython if available
 try:
     from Cython.Build import cythonize
-except:
+except Exception:
     log.critical(
         'Cython.Build.cythonize not found. '
         'Cython is required to build from a repo.')
@@ -53,7 +53,7 @@ opts = dict(
 )
 log.debug('opts:\n%s', pprint.pformat(opts))
 
-# Build extension modules 
+# Build extension modules
 ext_modules = cythonize([
     Extension(
         'ecopy.regression.isoFunc', ['ecopy/regression/isoFunc.pyx'], **opts),
@@ -78,11 +78,10 @@ setup_args = dict(
     author_email='lemoine.nathan@gmail.com',
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Alpha',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.7',
     ],
     keywords=['ordination', 'ecology', 'multivariate data analysis'],
     ext_modules=ext_modules,
